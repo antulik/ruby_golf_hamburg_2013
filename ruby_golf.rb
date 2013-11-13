@@ -79,6 +79,24 @@ module RubyGolf
   #           level are prepended by two additional spaces per level away from
   #           the top level
   def self.pretty_hash(h)
+
+    w = lambda { |d, l|
+      t = lambda { |value, p|
+        if Array === value
+          value.map { |v| ' ' * p + '- ' + v}
+        elsif Hash === value
+          w.call value, p + 2
+        else
+          ' ' * p +  '- ' + value.to_s
+        end
+      }
+
+      d.map { |k,v|
+        [' ' * l + k.to_s + ':', t.call(v,l) ]
+      }
+    }
+
+    w[h, 0].flatten.join("\n") + "\n"
   end
 
 
