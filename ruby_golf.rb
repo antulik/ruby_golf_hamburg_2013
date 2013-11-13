@@ -48,6 +48,9 @@ module RubyGolf
   # output: the maximum value found by calculating the sums of all rows and
   #         columns
   def self.grid_computing(g)
+    a = g.lines.map { |l| l.split(' ').map &:to_i }
+    f = lambda { |q| q.map { |l| l.reduce :+ }.max }
+    [f[a], f[a.transpose]].max
   end
 
 
