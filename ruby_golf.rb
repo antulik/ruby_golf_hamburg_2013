@@ -8,6 +8,10 @@ module RubyGolf
   #         v - number of visible trailing numbers
   # output: x'ed out string
   def self.x_out_numbers(n, v)
+    a = n.size
+    v = [a, v || 0].min
+    s = n[-v,v]
+    'x' * (a - s.size) + s
   end
 
 
