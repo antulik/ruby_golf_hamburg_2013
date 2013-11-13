@@ -114,6 +114,15 @@ module RubyGolf
   #           word 1* ...)
   #         * sum all products
   def self.word_letter_sum(s)
+    s.split(' ').
+        map { |w|
+      w.split('').map { |c| c.to_i(36) - 9 }.inject(:+)
+    }.
+        sort.
+        reverse.
+        each_with_index.
+        map { |x, i| x * i + x }.
+        inject(:+)
   end
 
 
